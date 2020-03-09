@@ -18,9 +18,6 @@ var io = new SocketIO(server);
 application.use(Express.static(path.join(__dirname, "/app")));
 application.use("/vendor", Express.static(__dirname + "/node_modules/"));
 
-
-var viewModel = require("./app/viewmodel");
-
 board.on("ready", () => {
   var clients = new Set();
   var monitor = new five.Multi({
@@ -28,9 +25,6 @@ board.on("ready", () => {
     elevation: 2,
   });
   var updated = Date.now() - 5000;
-
-
-  console.log(viewModel)
 
   monitor.on("change", () => {
     var now = Date.now();
