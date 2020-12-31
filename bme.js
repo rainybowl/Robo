@@ -12,8 +12,8 @@ board.on("ready", () => {
   monitor.on("change", function() {
     console.log("thermometer");
     console.log("  celsius      : ", this.thermometer.celsius);
-    console.log("  fahrenheit   : ", this.thermometer.fahrenheit);
-    console.log("  kelvin       : ", this.thermometer.kelvin);
+    // console.log("  fahrenheit   : ", this.thermometer.fahrenheit);
+    // console.log("  kelvin       : ", this.thermometer.kelvin);
     console.log("--------------------------------------");
 
     console.log("barometer");

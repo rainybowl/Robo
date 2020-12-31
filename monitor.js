@@ -19,39 +19,39 @@ application.use(Express.static(path.join(__dirname, "/app")));
 application.use("/vendor", Express.static(__dirname + "/node_modules/"));
 
 board.on("ready", () => {
-  var clients = new Set();
-  var monitor = new five.Multi({
-    controller: "BME280",
-    elevation: 2,
-  });
-  var updated = Date.now() - 5000;
+  // var clients = new Set();
+  // var monitor = new five.Multi({
+  //   controller: "BME280",
+  //   elevation: 2,
+  // });
+  // var updated = Date.now() - 5000;
 
-  monitor.on("change", () => {
-    var now = Date.now();
-    if (now - updated >= 5000) {
-      updated = now;
+  // monitor.on("change", () => {
+  //   var now = Date.now();
+  //   if (now - updated >= 5000) {
+  //     updated = now;
 
-      clients.forEach(recipient => {
-        recipient.emit("report", {
-          thermometer: monitor.thermometer.celsius,
-          barometer: monitor.barometer.pressure,
-          hygrometer: monitor.hygrometer.relativeHumidity,
-          altimeter: monitor.altimeter.meters,
-        });
-      });
-    }
-  });
+  //     clients.forEach(recipient => {
+  //       recipient.emit("report", {
+  //         thermometer: monitor.thermometer.celsius,
+  //         barometer: monitor.barometer.pressure,
+  //         hygrometer: monitor.hygrometer.relativeHumidity,
+  //         altimeter: monitor.altimeter.meters,
+  //       });
+  //     });
+  //   }
+  // });
 
-  io.on("connection", socket => {
-    // Allow up to 5 monitor sockets to
-    // connect to this enviro-monitor server
-    if (clients.size < 5) {
-      clients.add(socket);
-      // When the socket disconnects, remove
-      // it from the recipient set.
-      socket.on("disconnect", () => clients.delete(socket));
-    }
-  });
+  // io.on("connection", socket => {
+  //   // Allow up to 5 monitor sockets to
+  //   // connect to this enviro-monitor server
+  //   if (clients.size < 5) {
+  //     clients.add(socket);
+  //     // When the socket disconnects, remove
+  //     // it from the recipient set.
+  //     socket.on("disconnect", () => clients.delete(socket));
+  //   }
+  // });
 
   var port = 3000;
   server.listen(port, () => {

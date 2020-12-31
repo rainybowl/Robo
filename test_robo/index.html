@@ -1,0 +1,58 @@
+<html>
+<head></head>
+
+<body>
+hello robo!
+
+<input type="text" id="txt" name="">
+<button id="btn"></button>
+
+<div id="status"></div>
+
+
+<ul id="data">
+  
+</ul>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+  const socket = io('http://127.0.0.1:5000');
+   // var socket = io.connect('http://127.0.0.1:5000');
+
+     // Connect to socket.io
+   // var socket = io.connect('http://127.0.0.1:5000');
+  console.log(socket);
+
+  document.getElementById('btn').addEventListener('click', () => {
+    const text =  document.getElementById('txt').value;
+    console.log(text);
+    socket.emit('input', text)
+  })
+
+
+  socket.on('message', message => {
+    console.log(message);
+    document.getElementById('status').innerHTML = message;
+  });
+
+  socket.on('update', (data) => {
+    
+    console.log('UPD ', data);
+    const list = document.createDocumentFragment();
+    data.map(item => {
+      const li = document.createElement('li');
+      li.innerHTML = item.data;
+      list.appendChild(li);
+    });
+
+     document.getElementById('data').innerHTML = '';
+     document.getElementById('data').appendChild(list)
+
+
+  });
+</script>
+
+
+</body>
+</html>
