@@ -11,7 +11,7 @@
     "knockout": "^3.4.2",
     "mongodb": "^3.5.9",
     "nodemon": "^2.0.4",
-    "socket.io": "^1.4.8",
+    "socket.io": "^2.4.0",
     "socket.io-client": "^2.3.0",
     "tessel": "^0.3.25",
     "tessel-io": "^1.2.0"
